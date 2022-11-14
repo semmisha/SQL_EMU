@@ -9,7 +9,7 @@ import (
 
 func (S *ApiData) Initiate(config map[string]string, logger *logrus.Logger) {
 	S.Client = &http.Client{}
-	S.URL = config["API"]
+	S.URL = config["api"]
 
 }
 
