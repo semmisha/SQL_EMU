@@ -17,12 +17,13 @@ func (S *SQLData) Initiate(config map[string]string, logger *logrus.Logger) {
 		password = config["password"]
 	)
 
-	connString := fmt.Sprintf("sqlserver://%s:%s@%s?database=%s", username, password, url, db)
+	connString := fmt.Sprintf("sqlserver://%v:%v@%v?database=%v", username, password, url, db)
 
 	pool, err := sql.Open("sqlserver", connString)
 	err1 := pool.Ping()
 	if err != nil || err1 != nil {
-		logger.Fatal(err, err1)
+
+		logger.Fatal(err, err1, connString)
 	}
 	S.Connection = pool
 
