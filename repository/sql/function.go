@@ -23,7 +23,7 @@ func (S *SQLData) Initiate(config map[string]string, logger *logrus.Logger) {
 	err1 := pool.Ping()
 	if err != nil || err1 != nil {
 
-		logger.Fatal(err, err1, connString)
+		logger.Fatal(err, err1, username, password, url, db)
 	}
 	S.Connection = pool
 
