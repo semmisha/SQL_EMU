@@ -39,7 +39,7 @@ func (S *SQLData) UpdateSingleData(entity *entity.Entity, logger *logrus.Logger)
 		logger.Error(err)
 		return false
 	}
-	fmt.Println(entity.Sql.Id, entity.Sql.Data, entity.Word)
+	logger.Infof("Entry updated, id: %v", entity.Sql.Id)
 	return true
 
 }
@@ -55,14 +55,23 @@ func (S *SQLData) SaveSingleData(entity *entity.Entity, logger *logrus.Logger) (
 		logger.Error(err)
 		return false
 	}
-
+	logger.Infof("Entry inserted, id: %v , data: ", entity.Sql.Id, entity.Word)
 	return true
 
 }
 
 func (S *SQLData) DeleteSingleData(entity *entity.Entity, logger *logrus.Logger) (isSuccesfull bool) {
-	//TODO implement me
-	panic("implement me")
+	var (
+		conn = S.Connection
+	)
+
+	_, err := conn.Exec("Delete from test_cdc_table where test_id = @ID; ", sql.Named("ID", entity.Sql.Id))
+	if err != nil {
+		logger.Error(err)
+		return false
+	}
+	logger.Infof("Entry deleted, id: %v", entity.Sql.Id)
+	return true
 }
 
 func (S *SQLData) GetAllID(logger *logrus.Logger) (AllID []int, isSuccesfull bool) {

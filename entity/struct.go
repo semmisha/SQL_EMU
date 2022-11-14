@@ -16,6 +16,7 @@ type Entity struct {
 		Data         string //TODO check not bigger than 40 char
 		isSuccesfull bool
 	}
+	SleepDuration int
 }
 
 func NewEntity() *Entity {

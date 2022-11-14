@@ -21,31 +21,12 @@ func (S *SQLSimulatorInterfaces) ProcceedSave(logger *logrus.Logger) (isSuccesfu
 	if word, ok := input.GetSingleData(logger); ok {
 		entity.Word = word
 		if ok = repository.SaveSingleData(entity, logger); ok {
-			return true
+			utils.RandSleep(60)
+			S.ProcceedSave(logger)
+
 		}
 	}
 	return false
-
-	// Read config from env
-	// Connect to DB
-	// get random word from api
-	// insert to DB
-	// sleep for rand time
-
-	// Read config from env
-	// Connect to DB
-	// get random word from api
-	// get all id from db save to slice
-	// rand len slice
-	// update to DB
-	// sleep for rand time
-
-	// Read config from env
-	// Connect to DB
-	// get all id from db save to slice
-	// rand len slice
-	// delete from DB
-	// sleep for rand time
 
 }
 
@@ -66,6 +47,24 @@ func (S *SQLSimulatorInterfaces) ProcceedUpdate(logger *logrus.Logger) (isSucces
 			return true
 		}
 	}
+	return false
+
+}
+
+func (S *SQLSimulatorInterfaces) ProcceedDelete(logger *logrus.Logger) (isSuccesfull bool) {
+
+	var (
+		repository = S.Repository
+	)
+	entity := NewEntity()
+	if IDs, ok := repository.GetAllID(logger); ok {
+		entity.Sql.Id = utils.RandSlice(IDs)
+	}
+
+	if ok := repository.DeleteSingleData(entity, logger); ok {
+		return true
+	}
+
 	return false
 
 	// Read config from env

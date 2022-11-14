@@ -15,6 +15,8 @@ func GetConfig(logger *logrus.Logger) map[string]string {
 	config["username"] = os.Getenv("USERNAME_MSSQL")
 	config["password"] = os.Getenv("PASSWORD_MSSQL")
 	config["api"] = os.Getenv("API")
+	config["sleepDuration"] = os.Getenv("SLEEP_DURATION")
+
 	for i, _ := range config {
 
 		if len(config[i]) == 0 {

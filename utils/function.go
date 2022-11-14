@@ -5,10 +5,10 @@ import (
 	"time"
 )
 
-func RandSleep() {
+func RandSleep(duration int) {
 
 	rand.Seed(time.Now().UnixNano())
-	randSeconds := rand.Intn(60)
+	randSeconds := rand.Intn(duration)
 	time.Sleep(time.Duration(randSeconds) * time.Second)
 
 }
