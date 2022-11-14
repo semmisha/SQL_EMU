@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/sirupsen/logrus"
 	"os"
+	"strings"
 )
 
 func GetConfig(logger *logrus.Logger) map[string]string {
@@ -19,7 +20,7 @@ func GetConfig(logger *logrus.Logger) map[string]string {
 		if len(config[i]) == 0 {
 			logger.Fatalf("Config parameter: %v is empty", i)
 		}
-
+		config[i] = strings.ReplaceAll(config[i], "\n", "")
 	}
 
 	return config
