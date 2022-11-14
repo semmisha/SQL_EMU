@@ -1,6 +1,7 @@
 package main
 
 import (
+	"SQLSimulator/config"
 	"SQLSimulator/controller/api"
 	"SQLSimulator/entity"
 	"SQLSimulator/logging"
@@ -10,8 +11,8 @@ import (
 
 func main() {
 	logger := logging.Logger()
-	//conf := config.GetConfig(logger)
-	conf := make(map[string]string)
+	conf := config.GetConfig(logger)
+	//conf := make(map[string]string)
 	entityStruct := entity.SQLSimulatorInterfaces{
 		Input:      api.NewApiData(),
 		Repository: repsql.NewSQLData(),
