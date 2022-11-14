@@ -8,7 +8,7 @@ import (
 func RandSleep() {
 
 	rand.Seed(time.Now().UnixNano())
-	randSeconds := rand.Intn(400)
+	randSeconds := rand.Intn(60)
 	time.Sleep(time.Duration(randSeconds) * time.Second)
 
 }
